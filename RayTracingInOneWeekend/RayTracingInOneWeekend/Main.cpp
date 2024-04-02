@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 
+#include "Ray.h"
+
 using namespace std;
 
 const int mIMGWidth = 256;
