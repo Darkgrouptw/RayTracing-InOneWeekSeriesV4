@@ -5,21 +5,32 @@
 
 using namespace std;
 
-const int mIMGWidth = 256;
-const int mIMGHeight = 256;
 
 void main()
 {
+	#pragma region Image
+	double mAspectRatio = 16.0 / 9;
+	int imgWidth = 400;
+	int imgHeight = static_cast<int>(imgWidth / mAspectRatio);
+	if (imgHeight < 1) imgWidth = 1;
+	#pragma endregion
+	#pragma region Camera
+	auto focalLength = 1.0;
+	auto viewportHeight = 2.0;
+	auto viewportWeight = viewportHeight * imgWidth / imgHeight;
+	auto cameraCenter = vec3(0, 0, 0);
+	#pragma endregion
+
 	fstream file;
 	file.open("result.ppm", ios::out | ios::trunc);
-	file << "P3" << endl << mIMGWidth << " " << mIMGHeight << endl << "255" << endl;
-	for (int y = 0; y < mIMGHeight; y++)
+	file << "P3" << endl << imgWidth << " " << imgHeight << endl << "255" << endl;
+	for (int y = 0; y < imgHeight; y++)
 	{
-		clog << "Scanlines remaining: " << (mIMGHeight - y) << endl << flush;
-		for (int x = 0; x < mIMGWidth; x++)
+		clog << "Scanlines remaining: " << (imgHeight - y) << endl << flush;
+		for (int x = 0; x < imgWidth; x++)
 		{
-			auto r = double(x) / (mIMGWidth - 1);
-			auto g = double(y) / (mIMGHeight - 1);
+			auto r = double(x) / (imgWidth - 1);
+			auto g = double(y) / (imgHeight - 1);
 			auto b = 0;
 
 			int ir = static_cast<int>(255.0 * r);
