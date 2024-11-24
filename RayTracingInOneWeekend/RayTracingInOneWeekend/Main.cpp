@@ -6,7 +6,7 @@
 
 using namespace std;
 
-double hitSphere(const glm::dvec3& pCenter, double pRadius, const Ray& pRay)
+double HitSphere(const glm::dvec3& pCenter, double pRadius, const Ray& pRay)
 {
 	// Circle Formula check if it's inside							=>  x^2 + y^2 + z^2 <= r^2
 	// Point Ray 													=> pRayCenter + pRay.GetDirection() * t
@@ -26,7 +26,7 @@ double hitSphere(const glm::dvec3& pCenter, double pRadius, const Ray& pRay)
 glm::dvec3 GetRayColor(const Ray& r)
 {
 	auto sphereCenter 												= glm::dvec3(0, 0, -1);
-	auto t 															= hitSphere(sphereCenter, 0.5, r);
+	auto t 															= HitSphere(sphereCenter, 0.5, r);
 	if (t > 0) 
 	{
 		glm::dvec3 normal 											= glm::normalize(r.At(t) - sphereCenter);
